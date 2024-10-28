@@ -14,11 +14,9 @@ class Author(db.Model):
 
     @validates('name')
     def validate_name(self, key, name):
-        # Check for empty or None names
         if not name:
             raise ValueError("Name cannot be empty.")
         
-        # Check for uniqueness
         existing_author = Author.query.filter_by(name=name).first()
         if existing_author:
             raise ValueError("Name must be unique.")
